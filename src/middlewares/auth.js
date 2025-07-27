@@ -1,35 +1,14 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-// const adminAuth = (req, res, next) => {
-//     console.log("Admin auth is getting checked");
-//     const token = "xyz";
-//     const isAdminAuthorized = token === "xyz";
-//     if(!isAdminAuthorized) {
-//         res.status(401).send("Unauthorized Request");
-//     } else {
-//         next();
-//     }
-// }
-
 const userAuth = async (req, res, next) => {
-    // console.log("Admin auth is getting checked");
-    // const token = "xyz";
-    // const isAdminAuthorized = token === "xyz";
-    // if(!isAdminAuthorized) {
-    //     res.status(401).send("Unauthorized Request");
-    // } else {
-    //     next();
-    // }
-
-    // Read the token from the req cookies
-
+    
     try {
 
         const { token } = req.cookies;
 
         if(!token) {
-            throw new Error("Token is not valid");
+            return res.status(401).send("Please Login")
         }
 
         const decodeObj = await jwt.verify(token, "DEV@TINDER$790");
