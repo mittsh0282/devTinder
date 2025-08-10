@@ -4,6 +4,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 //const bcrypt = require("bcrypt");
 const cors = require("cors");
+require("dotenv").config();
 
 app.use(cors({
     origin: "http://localhost:5173",
@@ -24,7 +25,7 @@ app.use("/", userRouter)
 
 connectDB().then(() => {
     console.log("Database connection established...");
-    app.listen(3000, () => {
+    app.listen(process.env.PORT, () => {
         console.log("Server is successfully running on port 3000");
     });
 }).catch(err => {
